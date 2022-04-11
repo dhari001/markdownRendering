@@ -36,6 +36,9 @@ CREATE TABLE ADDRESS(
         postal_code
     )
 );
+```
+
+```
 -- =============================================================
 -- PROFILE
 -- =============================================================
@@ -52,6 +55,9 @@ CREATE TABLE PROFILE(
     DOB DATE NOT NULL,
     address_id VARCHAR(255) NOT NULL REFERENCES ADDRESS(id)
 );
+```
+
+```
 -- =============================================================
 -- PATIENT
 -- =============================================================
@@ -83,6 +89,8 @@ CREATE TABLE PROFILE_PHONE(
     UNIQUE(phone_number, profile_id),
     PRIMARY KEY (phone_number, profile_id)
 );
+```
+```
 -- =============================================================
 -- BRANCH
 -- =============================================================
@@ -108,6 +116,9 @@ CREATE TABLE BRANCH_PHONE(
     UNIQUE(phone_number, branch_id),
     PRIMARY KEY (phone_number, branch_id)
 );
+```
+
+```
 -- =============================================================
 -- EMPLOYEE
 -- =============================================================
@@ -131,6 +142,9 @@ CREATE TABLE EMPLOYEE(
     FOREIGN KEY(branch_id) REFERENCES BRANCH(id),
     FOREIGN KEY(manager_id) REFERENCES EMPLOYEE(id)
 );
+```
+
+```
 -- =============================================================
 -- APPOINTMENT_TYPE
 -- =============================================================
@@ -162,6 +176,9 @@ CREATE TABLE APPOINTMENT (
     status INT NOT NULL,
     room_number VARCHAR --Add branch, employee, and patient foreign keys?
 );
+```
+
+```
 -- =============================================================
 -- INSURANCE
 -- =============================================================
@@ -173,6 +190,9 @@ CREATE TABLE INSURANCE (
     FOREIGN KEY (patient_id) REFERENCES PATIENT(id),
     PRIMARY KEY (policy_number, group_number, patient_id)
 );
+```
+
+```
 -- =============================================================
 -- PROCEDURE_TYPE
 -- =============================================================
@@ -237,9 +257,9 @@ CREATE TABLE TREATMENT (
     symptoms VARCHAR(255),
     comments VARCHAR(255) --Add procedure_id foreign key?
 );
--- =============================================================
--- INVOICE
--- =============================================================
+```
+
+```
 -- =============================================================
 -- PAYMENT
 -- =============================================================
@@ -258,6 +278,9 @@ CREATE TABLE PAYMENT_TYPE(
     id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
     type VARCHAR(255) UNIQUE NOT NULL
 );
+```
+
+```
 -- =============================================================
 -- PATIENT_BILLING
 -- =============================================================
@@ -286,6 +309,10 @@ CREATE TABLE INSURANCE_CLAIM(
     FOREIGN KEY (policy_number) REFERENCES INSURANCE(policy_number),
     FOREIGN KEY (group_number) REFERENCES INSURANCE(group_number)
 ) INHERITS (PAYMENT);
+
+```
+
+```
 -- =============================================================
 -- REVIEW
 -- =============================================================
